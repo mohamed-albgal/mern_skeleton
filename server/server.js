@@ -1,73 +1,37 @@
+import config from './../config/config'
+import mongoose from 'mongoose'
+import app from './express'
 import { MongoClient } from 'mongodb'
-import express from 'express'
-const CURRENT_WORKING_DIR = process.cwd()
-import path from 'path'
-import template from './../template'
-import devBundle from './devBundle'
 
-const app = express()
-// this is supposed to make it easier to develop in dev mode (unsure of this)
-devBundle.compile(app)
-//this makes it so the server serves the staic files from the /dist directory if the request route is /dist
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mern_skeleton'
 
+//configure mongoose to use ES6 native promises (what does the alternative look like?)
+mongoose.Promise = global.Promise;
 
-app.get('/', (req,res) => {
-	res.status(200).send(template())
+//connect and configure it to use mongodb
+mongoose.connect(config.mongoUri, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true
 })
 
-let port = process.env.PORT || 3000
-app.listen(port, function onStart(err) {
+mongoose.connection.on('error', () => {
+	throw new Error(`unable to connect to db: ----> ${config.mongoUri}`)
+})
+// MongoClient.connect(url, (err, db) => {
+
+// 	console.log("Connected successfully to mongodb server")
+// 	db.close()
+// })
+app.listen(config.port, (err) => {
 	if (err) {
 		console.log(err)
 	}
-	console.info(`Server started on port ${port}.`)
+	console.info(`Server started on port ${config.port}`)
 })
 
-const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/sampleproj'
-MongoClient.connect(url, {useNewUrlParser:true, useUnifiedTopology:true },  ( err, db) => {
-	if (!err){
-		console.log("Connected successfully to mongodb server")
-		db.close()
-	}
-})
-
-// import path from 'path'
-// import express from 'express'
-// import { MongoClient } from 'mongodb'
-// import template from './../template'
-// //comment out before building for production
-// import devBundle from './devBundle'
-
-// const app = express()
-// //comment out before building for production
-// devBundle.compile(app)
-
-// const CURRENT_WORKING_DIR = process.cwd()
-// app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
-
-// app.get('/', (req, res) => {
-//   res.status(200).send(template())
-// })
-
-// let port = process.env.PORT || 3000
-// app.listen(port, function onStart(err) {
-//   if (err) {
-//     console.log(err)
-//   }
-//   console.info('Server started on port %s.', port)
-// })
-
-// // Database Connection URL
-// const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup'
-// // Use connect method to connect to the server
-// MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true },(err, db)=>{
-// 	if (err){
-// 		console.log("we have a pplahhblem!")
-
-// 	}else{
-// 		console.log("Connected successfully to mongodb server")
-//   		db.close()
-// 	}
-  
-// })
+/**
+ * don't forget to start the mongodb process: 
+	* start mongodb using brew services
+	* use mongo for shell environment
+ */
