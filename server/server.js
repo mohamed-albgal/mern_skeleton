@@ -1,7 +1,6 @@
 import config from './../config/config'
 import mongoose from 'mongoose'
 import app from './express'
-import { MongoClient } from 'mongodb'
 
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mern_skeleton'
 
@@ -18,11 +17,6 @@ mongoose.connect(config.mongoUri, {
 mongoose.connection.on('error', () => {
 	throw new Error(`unable to connect to db: ----> ${config.mongoUri}`)
 })
-// MongoClient.connect(url, (err, db) => {
-
-// 	console.log("Connected successfully to mongodb server")
-// 	db.close()
-// })
 app.listen(config.port, (err) => {
 	if (err) {
 		console.log(err)

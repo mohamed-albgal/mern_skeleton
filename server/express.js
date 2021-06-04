@@ -1,5 +1,4 @@
 import express from 'express'
-import Template from '../template.js'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
@@ -21,8 +20,8 @@ app.use('/', userRoutes)
 
 
 
+//expressjwt will throw an UnathorizedError if not authorized, here we control what is returned by that
 app.use((err, req, res, next) => {
-    //expressjwt will throw an UnathorizedError if not authorized, here we control what is returned by that
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({ "error" : err.name + ": " + err.message })
         console.log(err)

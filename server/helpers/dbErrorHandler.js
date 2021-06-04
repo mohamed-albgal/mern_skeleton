@@ -3,18 +3,14 @@
 const getErrorMessage = (err) => {
     let message = ''
     let { code } = err
-    if (code && code != 11000) {
-        if (code === 11001){
-            message = getUniqueErrorMessage(err)
-        }else {
-            message = "Something went wrong"
-        }
-    } else {
-        for (let errName in err.errors) {
-            if (err.errors[errName].message)
-                message = err.errors[errName].message
-        }
-    }
+
+    if (code) 
+        message = code === 11001 ? getUniqueErrorMessage(err) : "Something went wrong"
+     
+    for (let errName in err.errors)
+        if (err.errors[errName].message)
+            message = err.errors[errName].message
+
     return message
 }
 //some errors are non unique index values, deal with those here

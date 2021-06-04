@@ -1,3 +1,4 @@
+import crypto from 'crypto'
 import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema({
@@ -18,11 +19,24 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
     },
     updated: Date,
+    salt: String,
     hashed_password: {
         type: String, 
         required: "Password is required" ,
     },
 })
+
+//password is a virtual field, pw is salted, encrypted, and stored as 'hashed_password'
+//use the user schema methods defined above
+UserSchema.virtual('password')
+    .set(function(password) {
+        this._password = password
+        this.salt = this.makeSalt()
+        this.hashed_password = this.encryptPassword(password)
+     }).get(function() {
+         return this._password
+     })
+
 UserSchema.methods = {
     authenticate: function(plaintext) {
         return this.encryptPassword(plaintext) == this.hashed_password
@@ -32,6 +46,7 @@ UserSchema.methods = {
         try {
             return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
         }catch (err) {
+            console.log(err)
             return ''
         }
     },
@@ -39,16 +54,7 @@ UserSchema.methods = {
         return Math.round((new Date().valueOf() * Math.random())) + ''
     }
 }
-//password is a virtual field, pw is salted, encrypted, and stored as 'hashed_password'
-//use the user schema methods defined above
-UserSchema.virtual('password')
-    .set(function(password) {
-        this._password = password
-        this.salt = this.makeSalt()
-        this.hashed_password = this.encryptPassword(password)
-    }).get(function() {
-        return this._password
-    })
+
 UserSchema.path('hashed_password').validate( function(v) {
     if (this._password && this._password.length < 6) {
         this.invalidate('password', 'Password must be at least 6 characters.')

@@ -40,7 +40,7 @@ const signout = (req, res) => {
 //if valid it takes the userid (which it knows somehow) and places it as the value for the 'auth' key in the request object
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
-    algorithms: ['RS256'],
+    algorithms: ['HS256'],
     userProperty: 'auth'
 
 }) 
