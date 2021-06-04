@@ -17,26 +17,29 @@
   },
   "homepage": "https://github.com/mohamed-albgal/mern_skeleton#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/preset-react": "^7.14.4",
-    "babel-loader": "^8.2.2",
-    "nodemon": "^2.0.2",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.0",
-    "webpack-node-externals": "^3.0.0"
+    "@babel/core": "7.14.3",
+    "@babel/preset-env": "7.14.4",
+    "@babel/preset-react": "7.13.13",
+    "babel-loader": "8.2.2",
+    "nodemon": "2.0.2",
+    "webpack": "5.38.1",
+    "webpack-cli": "4.7.0",
+    "webpack-node-externals": "3.0.0"
   },
   "dependencies": {
-    "@hot-loader/react-dom": ">16.13.0",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "helmet": "^4.6.0",
-    "mongodb": ">3.6.9",
-    "mongoose": "^5.12.12",
-    "react": ">17.0.2",
-    "react-dom": ">17.0.2",
-    "react-hot-loader": ">4.12.20"
+    "@hot-loader/react-dom": "16.13.0",
+    "compression": "1.7.4",
+    "cookie-parser": "1.4.5",
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "express-jwt": "^6.0.0",
+    "helmet": "4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "4.17.21",
+    "mongodb": "3.6.9",
+    "mongoose": "5.12.12",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hot-loader": "4.12.20"
   }
 }

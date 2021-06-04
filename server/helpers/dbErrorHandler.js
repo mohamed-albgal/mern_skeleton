@@ -10,9 +10,9 @@ const getErrorMessage = (err) => {
             message = "Something went wrong"
         }
     } else {
-        for (let errNmae in err.errors) {
-            if (err.erros[errName].message)
-            message = err.errors[errName].message
+        for (let errName in err.errors) {
+            if (err.errors[errName].message)
+                message = err.errors[errName].message
         }
     }
     return message
@@ -30,4 +30,4 @@ const getUniqueErrorMessage = (err) => {
     return output
 }
 
-export default {getErrorMessagel} 
+export default {getErrorMessage} 
