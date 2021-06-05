@@ -1,8 +1,8 @@
-import express, { Router } from 'express'
+import { Router } from 'express'
 import authController from '../controllers/auth.controller'
 import userCtrlr from '../controllers/user.controller'
 
-const router = express.Router()
+const router = Router()
 
 router.route('/api/users')
     .get(userCtrlr.list)

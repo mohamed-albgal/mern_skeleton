@@ -2,8 +2,6 @@ import config from './../config/config'
 import mongoose from 'mongoose'
 import app from './express'
 
-const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mern_skeleton'
-
 //configure mongoose to use ES6 native promises (what does the alternative look like?)
 mongoose.Promise = global.Promise;
 
