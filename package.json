@@ -21,13 +21,16 @@
     "@babel/preset-env": "7.14.4",
     "@babel/preset-react": "7.13.13",
     "babel-loader": "8.2.2",
+    "file-loader": "^6.2.0",
     "nodemon": "2.0.2",
     "webpack": "5.38.1",
     "webpack-cli": "4.7.0",
+    "webpack-dev-middleware": "^5.0.0",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "3.0.0"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "16.13.0",
+    "@hot-loader/react-dom": "^17.0.1",
     "compression": "1.7.4",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
@@ -39,8 +42,8 @@
     "lodash": "4.17.21",
     "mongodb": "3.6.9",
     "mongoose": "5.12.12",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-hot-loader": "4.12.20"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0"
   }
 }

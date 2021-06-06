@@ -5,9 +5,16 @@ import cors from 'cors'
 import helmet from 'helmet'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
+import devBundle from './devBundle'
+import path from 'path'
+
+
 
 const app = express()
+devBundle.compile(app)
 
+const CURRENT_WORKING_DIR = process.cwd()
+app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
