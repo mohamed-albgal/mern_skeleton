@@ -36,7 +36,7 @@ const signout = (req, res) => {
 }
 //express checks the auth header for us to make sure the token is present and valid
 //it throws an authentication error if invalid
-//if valid it takes the userid (which it knows somehow) and places it as the value for the 'auth' key in the request object
+//if valid it takes the userid (which it knows somehow edit: it know this becuase the endpoint that called this has the segment :userId) and places it as the value for the 'auth' key in the request object
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
     algorithms: ['HS256'],

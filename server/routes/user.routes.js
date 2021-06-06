@@ -8,7 +8,7 @@ router.route('/api/users')
     .get(userCtrlr.list)
     .post(userCtrlr.create)
 
-    //need to authorize requests to these routes, see block below this
+    //need to authorize and authenticate requests to these routes, see block below this
 // router.route('/api/users/:userId')
 //     .get(userCtrlr.read)
 //     .put(userCtrlr.update)

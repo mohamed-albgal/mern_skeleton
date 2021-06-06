@@ -5,7 +5,7 @@ const getErrorMessage = (err) => {
     let { code } = err
 
     if (code) 
-        message = code === 11001 ? getUniqueErrorMessage(err) : "Something went wrong"
+        return code === 11001 ? getUniqueErrorMessage(err) : "Something went wrong"
      
     for (let errName in err.errors)
         if (err.errors[errName].message)
